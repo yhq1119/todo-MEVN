@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body style="width: 40rem;" img-top>
+  <b-card no-body style="width: 40rem;margin: 10px 10px 10px 10px" class="mt-4" img-top>
     <template v-slot:header>
       <h4 class="mb-0">Todo List App</h4>
     </template>
