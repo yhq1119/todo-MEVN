@@ -52,7 +52,7 @@ exports.ReadOne = async (req, res) => {
 
 exports.Update = async (req, res) => {
     const { id } = req.params
-    const { content, status, finish_date } = req.body
+    const {  status } = req.body
     todoItemModel.findOne({ id }).exec((err, data) => {
         if (err || !data) {
             return res.json({
@@ -67,9 +67,9 @@ exports.Update = async (req, res) => {
         // const data_ = { content, status,finish_date, ..._doc}
         // console.log(data_)
         // const newOne = new todoItemModel(data_)
-        data.content = content
+        //data.content = content
         data.status = status
-        data.finish_date= finish_date
+        // data.finish_date= finish_date
         data.save(err=>{
             if(err){
                 return res.json({
