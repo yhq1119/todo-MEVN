@@ -54,22 +54,41 @@ exports.Update = async (req, res) => {
     const { id } = req.params
     const { content, status, finish_date } = req.body
     todoItemModel.findOne({ id }).exec((err, data) => {
-        if (err) {
+        if (err || !data) {
             return res.json({
                 code: 'error',
-                msg: err
+                msg: err,
+                note:"Not found"
             })
         }
-
-
-        data = {...content,status,finish_date}
-        new todoItemModel(data).save()
+        // const {id, create_date} = data
+        // const data_ = { content, status,finish_date, create_date}
+        // const {_doc} = data
+        // const data_ = { content, status,finish_date, ..._doc}
+        // console.log(data_)
+        // const newOne = new todoItemModel(data_)
+        data.content = content
+        data.status = status
+        data.finish_date= finish_date
+        data.save(err=>{
+            if(err){
+                return res.json({
+                    code:"error",
+                    msg: err,
+                    note:"update error"
+                })
+            }
+            return res.json({
+                code: "success",
+                msg: `Item id=${id} Updated`
+            })
+        })
     })
 }
 
 exports.Delete = async (req, res) => {
     const { id } = req.params
-    todoItemModel.findByIdAndRemove({ id }).exec((err, data) => {
+    todoItemModel.findOneAndDelete({ id }).exec((err, data) => {
         if (err) {
             return res.json({
                 code: 'error',
