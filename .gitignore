@@ -103,3 +103,5 @@
 # # TernJS port file
 # .tern-port
 # frontend-vue/
+node_modules
+.env
